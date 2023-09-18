@@ -20,33 +20,34 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
-  email: z.string().min(1, "Email obrigatório").email("Invalid email"),
+  login: z.string().min(1, "login obrigatório"),
   password: z
     .string()
     .min(1, "Senha obrigatória"),
 });
 
-export default function SignInForm () {
-  const [email, setEmail] = useState<string>('');
+export default function SignInForm() {
+  const [login
+    , setlogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const router = useRouter();
 
   async function onSubmit(values: z.infer<typeof FormSchema>) {
-    console.log(values);
-    setEmail(values.email);
+    //console.log(values);
+    setlogin
+      (values.login
+      );
     setPassword(values.password);
 
     const result = await signIn('credentials', {
-      email,
+      login,
       password,
       redirect: false
     })
+    console.log(result)
 
-    if(result?.error) {
-      console.log(result);
-      return;
-    }
+
 
     router.replace('/admin');
   };
@@ -54,7 +55,7 @@ export default function SignInForm () {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: "",
+      login: "",
       password: "",
     },
   });
@@ -67,14 +68,17 @@ export default function SignInForm () {
           <div className="space-y-[10px]">
             <FormField
               control={form.control}
-              name="email"
+              name="login"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-[18px] font-medium">Seu email</FormLabel>
+                  <FormLabel className="text-[18px] font-medium">Seu login
+                  </FormLabel>
                   <FormControl>
                     <Input
+                      type="text"
                       className="text-[14px] mt-1 border-slate-300 border-[1.5px]"
-                      placeholder="Seu email"
+                      placeholder="Seu login
+                  "
                       {...field}
                     />
                   </FormControl>
