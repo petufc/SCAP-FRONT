@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 
 function Header() {
   return (
-    <header className="flex w-full justify-between pl-11 pr-11 px-5 py-5">
+    <header className="flex w-full justify-between pl-11 pr-11 px-5 py-5 fixed z-10 top-0">
       <h1 className="font-bold">PET-SI</h1>
       <div className="flex gap-1">
         <NavigationMenu>
