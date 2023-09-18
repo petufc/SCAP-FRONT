@@ -15,6 +15,9 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import PrimaryTitle from "../PrimaryTitle";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email obrigatório").email("Invalid email"),
@@ -23,9 +26,29 @@ const FormSchema = z.object({
     .min(1, "Senha obrigatória"),
 });
 
-const SignInForm = () => {
-  const onSubmit = (values: z.infer<typeof FormSchema>) => {
+export default function SignInForm () {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
+  const router = useRouter();
+
+  async function onSubmit(values: z.infer<typeof FormSchema>) {
     console.log(values);
+    setEmail(values.email);
+    setPassword(values.password);
+
+    const result = await signIn('credentials', {
+      email,
+      password,
+      redirect: false
+    })
+
+    if(result?.error) {
+      console.log(result);
+      return;
+    }
+
+    router.replace('/admin');
   };
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -87,5 +110,3 @@ const SignInForm = () => {
     </Form>
   );
 };
-
-export default SignInForm;

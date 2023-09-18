@@ -2,6 +2,7 @@ import Header from '@/components/Header'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import NextAuthSessionProvider from '@/providers/sessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className='h-screen flex justify-center items-center'>
-          <Header />
-          {children}
-        </main>
+        <NextAuthSessionProvider>
+          <main className='h-screen flex justify-center items-center'>
+            <Header />
+            {children}
+          </main>
+        </NextAuthSessionProvider>
       </body>
     </html>
   )
