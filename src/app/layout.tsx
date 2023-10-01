@@ -20,10 +20,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthSessionProvider>
-          <main className='h-screen flex justify-center items-center'>
-            <Header />
-            {children}
-          </main>
+          <Header />
+          <main className="flex justify-center items-center">{children}</main>
         </NextAuthSessionProvider>
       </body>
     </html>

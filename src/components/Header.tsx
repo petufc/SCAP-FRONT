@@ -1,34 +1,28 @@
 "use client";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
-import { Button } from "./ui/button";
+import Image from 'next/image';
+import BackButton from '@/app/assets/arrow-left.png';
+import Link from "next/link";
+import Logo from '@/app/assets/SCAP.png';
 
 function Header() {
   return (
-    <header className="flex w-full justify-between pl-11 pr-11 px-5 py-5 fixed z-10 top-0">
-      <h1 className="font-bold">PET-SI</h1>
-      <div className="flex gap-1">
-        <NavigationMenu>
-            <NavigationMenuList>
-            <NavigationMenuItem>
-                <NavigationMenuTrigger>Projetos</NavigationMenuTrigger>
-                <NavigationMenuContent className="p-2">
-                <NavigationMenuLink>Link</NavigationMenuLink>
-                </NavigationMenuContent>
-            </NavigationMenuItem>
-            </NavigationMenuList>
-        </NavigationMenu>
-        <Button>Login</Button>
-      </div>
-    </header>
+    <header className="bg-neutral-900 pb-4 pt-5 flex items-left">
+            <Link href="index.js" 
+            className="pl-6 w-auto h-auto">
+                <Image 
+                src={BackButton} 
+                alt="Voltar"
+                className="back-button" />
+            </Link>
+            <div className='pl-3 w-auto h-auto'>
+                <Image 
+                src={Logo} 
+                alt="Logo"
+                className="logo" 
+                />
+            </div>
+            
+      </header>
   );
 }
 
